@@ -208,35 +208,6 @@ void loop() {
 
 
 //------------------------------------------------------------------------------
-void look() {
-  int i;
-  for(i=0;i<NUM_EYES;++i) {
-    inputs[i] = analogRead(A1+i);
-#if VERBOSE > 2
-    Serial.print(inputs[i]);
-    Serial.print('\t');
-#endif
-  }
-#if VERBOSE > 2
-  Serial.print('\n');
-#endif
-}
-
-
-//------------------------------------------------------------------------------
-void steer(float forward,float turn) {
-  int a = LEFT_NO_MOVE - forward + turn;
-  int b = RIGHT_NO_MOVE + forward + turn;
-  
-  if(a<10) a=10;  if(a>170) a=170;
-  if(b<10) b=10;  if(b>170) b=170;
-  
-  left.write(a);
-  right.write(b);
-}
-
-
-//------------------------------------------------------------------------------
 void wait(int ms) {
   // give us time to position robot
   long start=millis();
@@ -311,3 +282,30 @@ void followLine() {
   steer(forward,turn);
 }
 
+//------------------------------------------------------------------------------
+void look() {
+  int i;
+  for(i=0;i<NUM_EYES;++i) {
+    inputs[i] = analogRead(A1+i);
+#if VERBOSE > 2
+    Serial.print(inputs[i]);
+    Serial.print('\t');
+#endif
+  }
+#if VERBOSE > 2
+  Serial.print('\n');
+#endif
+}
+
+
+//------------------------------------------------------------------------------
+void steer(float forward,float turn) {
+  int a = LEFT_NO_MOVE - forward + turn;
+  int b = RIGHT_NO_MOVE + forward + turn;
+  
+  if(a<10) a=10;  if(a>170) a=170;
+  if(b<10) b=10;  if(b>170) b=170;
+  
+  left.write(a);
+  right.write(b);
+}
