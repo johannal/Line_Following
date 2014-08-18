@@ -284,6 +284,7 @@ void followLine() {
 
 //------------------------------------------------------------------------------
 void look() {
+  // read the amount of light hitting each sensor
   int i;
   for(i=0;i<NUM_EYES;++i) {
     inputs[i] = analogRead(A1+i);
